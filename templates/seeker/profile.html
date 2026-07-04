@@ -1,0 +1,94 @@
+{% extends 'base.html' %}
+{% block title %}My Profile - HireHub{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row g-5">
+        
+        <!-- Profile Form -->
+        <div class="col-lg-5">
+            <div class="card shadow-sm border-0 mb-4">
+                <div class="card-header bg-white border-bottom py-3 d-flex align-items-center">
+                    <div class="bg-primary text-white rounded-circle d-flex align-items-center justify-content-center me-3" style="width: 40px; height: 40px;">
+                        <i class="fa-solid fa-user"></i>
+                    </div>
+                    <h4 class="mb-0 fw-bold">Update Profile</h4>
+                </div>
+                <div class="card-body p-4">
+                    <form method="POST">
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold">Phone Number</label>
+                            <input type="text" class="form-control" name="phone" value="{{ profile.phone if profile else '' }}" placeholder="+1 234 567 8900">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold">Address / Location</label>
+                            <input type="text" class="form-control" name="address" value="{{ profile.address if profile else '' }}" placeholder="City, State">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold">Skills (Comma separated)</label>
+                            <input type="text" class="form-control" name="skills" value="{{ profile.skills if profile else '' }}" placeholder="HTML, CSS, JavaScript">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold">Education</label>
+                            <input type="text" class="form-control" name="education" value="{{ profile.education if profile else '' }}" placeholder="BSc Computer Science">
+                        </div>
+                        <div class="mb-4">
+                            <label class="form-label fw-semibold">Experience</label>
+                            <textarea class="form-control" name="experience" rows="3" placeholder="Brief summary of your professional experience">{{ profile.experience if profile else '' }}</textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100 fw-bold">Save Profile Information</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Application History -->
+        <div class="col-lg-7">
+            <h4 class="fw-bold mb-4">My Applications</h4>
+            
+            {% if apps %}
+                <div class="table-responsive bg-white rounded-3 shadow-sm">
+                    <table class="table table-hover align-middle mb-0">
+                        <thead class="bg-light">
+                            <tr>
+                                <th class="py-3 px-4">Job Title</th>
+                                <th class="py-3 px-4">Company</th>
+                                <th class="py-3 px-4">Applied Date</th>
+                                <th class="py-3 px-4 text-center">Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for app in apps %}
+                            <tr>
+                                <td class="px-4 fw-bold text-primary">{{ app.title }}</td>
+                                <td class="px-4"><i class="fa-solid fa-building me-1 text-muted"></i> {{ app.company }}</td>
+                                <td class="px-4 text-muted small">{{ app.applied_date }}</td>
+                                <td class="px-4 text-center">
+                                    {% if app.status == 'Pending' %}
+                                        <span class="badge bg-warning text-dark px-3 py-2 rounded-pill">Pending</span>
+                                    {% elif app.status == 'Accepted' %}
+                                        <span class="badge bg-success px-3 py-2 rounded-pill">Accepted for Interview</span>
+                                    {% else %}
+                                        <span class="badge bg-danger px-3 py-2 rounded-pill">Rejected</span>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            {% else %}
+                <div class="text-center py-5 bg-white rounded-3 shadow-sm border border-light">
+                    <div class="bg-light text-muted rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 80px; height: 80px;">
+                        <i class="fa-solid fa-file-signature fs-1"></i>
+                    </div>
+                    <h5 class="fw-bold">No Applications Yet</h5>
+                    <p class="text-muted mb-3">You haven't applied to any jobs yet.</p>
+                    <a href="{{ url_for('seeker_dashboard') }}" class="btn btn-outline-primary fw-bold px-4">Find Jobs</a>
+                </div>
+            {% endif %}
+        </div>
+        
+    </div>
+</div>
+{% endblock %}

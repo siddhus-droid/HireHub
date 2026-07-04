@@ -1,0 +1,88 @@
+{% extends 'base.html' %}
+{% block title %}{{ job.title }} - HireHub{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row g-5">
+        <div class="col-lg-8">
+            <div class="card shadow-sm border-0 mb-4">
+                <div class="card-body p-4 p-md-5">
+                    <div class="d-flex justify-content-between align-items-start mb-4">
+                        <div>
+                            <h2 class="fw-bold mb-2">{{ job.title }}</h2>
+                            <h5 class="text-primary fw-semibold"><i class="fa-solid fa-building me-2"></i> {{ job.company }}</h5>
+                        </div>
+                        <span class="badge bg-light text-dark border border-secondary px-3 py-2 rounded-pill fs-6">{{ job.category }}</span>
+                    </div>
+
+                    <div class="row g-3 mb-4 bg-light rounded-3 p-3 text-muted">
+                        <div class="col-sm-6 col-md-3">
+                            <strong class="d-block text-dark"><i class="fa-solid fa-location-dot me-2 text-primary"></i> Location</strong>
+                            {{ job.location }}
+                        </div>
+                        <div class="col-sm-6 col-md-3">
+                            <strong class="d-block text-dark"><i class="fa-solid fa-money-bill-wave me-2 text-success"></i> Salary</strong>
+                            {{ job.salary }}
+                        </div>
+                        <div class="col-sm-6 col-md-3">
+                            <strong class="d-block text-dark"><i class="fa-solid fa-briefcase me-2 text-warning"></i> Experience</strong>
+                            {{ job.experience }}
+                        </div>
+                        <div class="col-sm-6 col-md-3">
+                            <strong class="d-block text-dark"><i class="fa-regular fa-calendar-xmark me-2 text-danger"></i> Deadline</strong>
+                            {{ job.last_date }}
+                        </div>
+                    </div>
+
+                    <div class="mb-4">
+                        <h5 class="fw-bold border-bottom pb-2 mb-3">Required Skills</h5>
+                        <div class="d-flex flex-wrap gap-2">
+                            {% for skill in job.skills.split(',') %}
+                                <span class="badge bg-primary text-white border border-primary px-3 py-2 rounded-pill shadow-sm">{{ skill.strip() }}</span>
+                            {% endfor %}
+                        </div>
+                    </div>
+
+                    <div>
+                        <h5 class="fw-bold border-bottom pb-2 mb-3">Job Description</h5>
+                        <p class="text-muted" style="white-space: pre-line;">{{ job.description }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-4">
+            <div class="card shadow-sm border-0 sticky-top" style="top: 20px;">
+                <div class="card-header bg-primary text-white text-center py-4">
+                    <h4 class="mb-0 fw-bold">Apply for this Job</h4>
+                </div>
+                <div class="card-body p-4">
+                    {% if session.get('role') == 'seeker' %}
+                        <form method="POST" enctype="multipart/form-data">
+                            <div class="mb-4">
+                                <label class="form-label fw-semibold">Upload Resume</label>
+                                <div class="input-group">
+                                    <input type="file" class="form-control" name="resume" accept=".pdf,.doc,.docx" required>
+                                </div>
+                                <div class="form-text text-muted mt-2"><i class="fa-solid fa-circle-info me-1"></i> Accepted formats: PDF, DOC, DOCX (Max 16MB)</div>
+                            </div>
+                            <button type="submit" class="btn btn-primary w-100 btn-lg fw-bold shadow-sm">Submit Application</button>
+                        </form>
+                    {% elif session.get('role') == 'employer' %}
+                        <div class="alert alert-warning text-center">
+                            <i class="fa-solid fa-triangle-exclamation mb-2 fs-3 d-block"></i>
+                            Employers cannot apply for jobs.
+                        </div>
+                    {% else %}
+                        <div class="text-center">
+                            <p class="text-muted mb-3">You must be logged in as a Job Seeker to apply.</p>
+                            <a href="{{ url_for('login') }}" class="btn btn-outline-primary fw-bold w-100 mb-2">Login</a>
+                            <a href="{{ url_for('register') }}" class="btn btn-primary fw-bold w-100">Register</a>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

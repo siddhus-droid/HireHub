@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% block title %}Login - HireHub{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6 col-lg-5">
+            <div class="card shadow-lg border-0">
+                <div class="card-header bg-white text-center py-4 border-bottom-0">
+                    <div class="bg-primary text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-3 shadow-sm" style="width: 70px; height: 70px;">
+                        <i class="fa-solid fa-lock fs-2"></i>
+                    </div>
+                    <h3 class="mb-0 fw-bold">Welcome Back</h3>
+                    <p class="text-muted">Sign in to your account</p>
+                </div>
+                <div class="card-body p-4 p-md-5 pt-0">
+                    <form method="POST" action="{{ url_for('login') }}">
+                        <div class="mb-3">
+                            <label for="email" class="form-label fw-semibold">Email</label>
+                            <div class="input-group input-group-lg">
+                                <span class="input-group-text bg-light border-end-0"><i class="fa-solid fa-envelope text-muted"></i></span>
+                                <input type="email" class="form-control border-start-0 ps-0 text-dark placeholder-muted bg-light" id="email" name="email" required placeholder="name@example.com" style="background-color: var(--bs-light) !important;">
+                            </div>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <label for="password" class="form-label fw-semibold">Password</label>
+                            <div class="input-group input-group-lg">
+                                <span class="input-group-text bg-light border-end-0"><i class="fa-solid fa-key text-muted"></i></span>
+                                <input type="password" class="form-control border-start-0 ps-0 bg-light text-dark" id="password" name="password" required>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary btn-lg w-100 fw-bold mb-3">Sign In</button>
+                    </form>
+                    
+                    <div class="text-center mt-4">
+                        <p class="text-muted mb-0">Don't have an account? <a href="{{ url_for('register') }}" class="text-primary fw-bold text-decoration-none">Register here</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    /* Specific input group override to make the bg-light fill across inputs nicely */
+    .input-group .form-control:focus {
+        background-color: #fff !important;
+        border-color: var(--primary-color);
+        box-shadow: none;
+    }
+    .input-group:focus-within {
+        box-shadow: 0 0 0 0.25rem rgba(79, 70, 229, 0.25);
+        border-radius: 8px;
+    }
+    .input-group:focus-within .input-group-text,
+    .input-group:focus-within .form-control {
+        border-color: var(--primary-color);
+        background-color: #fff !important;
+    }
+</style>
+{% endblock %}

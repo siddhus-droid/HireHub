@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+{% block title %}Applicants for {{ job.title }} - HireHub{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="d-flex justify-content-between align-items-center mb-4 pb-3 border-bottom">
+        <div>
+            <h2 class="fw-bold mb-0">Applicants</h2>
+            <p class="text-muted mb-0">For {{ job.title }}</p>
+        </div>
+        <a href="{{ url_for('employer_dashboard') }}" class="btn btn-outline-secondary fw-bold">
+            <i class="fa-solid fa-arrow-left me-2"></i> Back to Dashboard
+        </a>
+    </div>
+
+    {% if applicants %}
+        <div class="table-responsive bg-white rounded-3 shadow-sm">
+            <table class="table table-hover align-middle mb-0">
+                <thead class="bg-light">
+                    <tr>
+                        <th class="py-3 px-4">Applicant</th>
+                        <th class="py-3 px-4">Contact</th>
+                        <th class="py-3 px-4">Skills & Education</th>
+                        <th class="py-3 px-4">Applied Date</th>
+                        <th class="py-3 px-4">Status</th>
+                        <th class="py-3 px-4 text-center">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for app in applicants %}
+                    <tr>
+                        <td class="px-4 fw-bold">{{ app.name }}</td>
+                        <td class="px-4">
+                            <a href="mailto:{{ app.email }}" class="text-decoration-none"><i class="fa-solid fa-envelope me-1"></i> {{ app.email }}</a>
+                        </td>
+                        <td class="px-4">
+                            <div class="small fw-semibold text-primary mb-1">{{ app.skills or 'N/A' }}</div>
+                            <div class="small text-muted">{{ app.education or 'N/A' }}</div>
+                        </td>
+                        <td class="px-4 text-muted small">{{ app.applied_date }}</td>
+                        <td class="px-4">
+                            {% if app.status == 'Pending' %}
+                                <span class="badge bg-warning text-dark px-3 py-2 rounded-pill">Pending</span>
+                            {% elif app.status == 'Accepted' %}
+                                <span class="badge bg-success px-3 py-2 rounded-pill">Accepted</span>
+                            {% else %}
+                                <span class="badge bg-danger px-3 py-2 rounded-pill">Rejected</span>
+                            {% endif %}
+                        </td>
+                        <td class="px-4 text-center">
+                            <a href="{{ url_for('static', filename='uploads/' + app.resume) }}" target="_blank" class="btn btn-sm btn-outline-primary mb-1 w-100 fw-bold">
+                                <i class="fa-solid fa-file-arrow-down me-1"></i> Resume
+                            </a>
+                            <form method="POST" action="{{ url_for('update_application', app_id=app.app_id) }}" class="d-flex gap-1 mt-1 justify-content-center">
+                                <button type="submit" name="status" value="Accepted" class="btn btn-sm btn-success flex-fill" title="Accept" {% if app.status == 'Accepted' %}disabled{% endif %}><i class="fa-solid fa-check"></i></button>
+                                <button type="submit" name="status" value="Rejected" class="btn btn-sm btn-danger flex-fill" title="Reject" {% if app.status == 'Rejected' %}disabled{% endif %}><i class="fa-solid fa-xmark"></i></button>
+                            </form>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    {% else %}
+        <div class="text-center py-5 bg-white rounded-3 shadow-sm border border-light">
+            <div class="bg-light text-muted rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 80px; height: 80px;">
+                <i class="fa-solid fa-users-slash fs-1"></i>
+            </div>
+            <h4 class="fw-bold">No Applicants Yet</h4>
+            <p class="text-muted mb-0">Check back later when candidates start applying!</p>
+        </div>
+    {% endif %}
+</div>
+{% endblock %}

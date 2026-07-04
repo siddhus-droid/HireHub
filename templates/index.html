@@ -1,0 +1,90 @@
+{% extends 'base.html' %}
+{% block title %}Home - HireHub{% endblock %}
+
+{% block content %}
+<div class="hero-section text-center">
+    <div class="container py-5">
+        <h1 class="display-3 fw-bold mb-4">Find Your Dream Job</h1>
+        <p class="lead mb-5 fs-4">Connect with top employers and discover opportunities that match your skills.</p>
+        
+        {% if not session.get('user_id') %}
+            <div class="d-flex justify-content-center gap-3">
+                <a href="{{ url_for('register') }}" class="btn btn-light btn-lg px-5 fw-bold text-primary">Get Started</a>
+                <a href="{{ url_for('login') }}" class="btn btn-outline-light btn-lg px-5 fw-bold">Login</a>
+            </div>
+        {% else %}
+            {% if session.get('role') == 'employer' %}
+                <a href="{{ url_for('employer_dashboard') }}" class="btn btn-light btn-lg px-5 fw-bold text-primary">Go to Dashboard</a>
+            {% else %}
+                <a href="{{ url_for('seeker_dashboard') }}" class="btn btn-light btn-lg px-5 fw-bold text-primary">Browse Jobs</a>
+            {% endif %}
+        {% endif %}
+    </div>
+</div>
+
+<div class="container py-5">
+    <!-- About Section -->
+    <div class="row align-items-center mb-5 pb-5 border-bottom">
+        <div class="col-lg-6 mb-4 mb-lg-0">
+            <h2 class="fw-bold mb-4">About HireHub</h2>
+            <p class="lead text-muted">
+                HireHub is a modern platform designed to bridge the gap between talented individuals and fast-growing companies. We simplify the recruitment lifecycle for both employers and job seekers.
+            </p>
+            <ul class="list-unstyled text-muted">
+                <li class="mb-2"><i class="fa-solid fa-check text-success me-2"></i> Intuitive tracking for applications</li>
+                <li class="mb-2"><i class="fa-solid fa-check text-success me-2"></i> Seamless resume uploads</li>
+                <li class="mb-2"><i class="fa-solid fa-check text-success me-2"></i> Fast and responsive interface</li>
+            </ul>
+        </div>
+        <div class="col-lg-6">
+            <div class="card bg-light border-0 p-4 text-center">
+                <i class="fa-solid fa-people-arrows text-primary mb-3" style="font-size: 4rem;"></i>
+                <h4 class="fw-bold">Join 10,000+ Users</h4>
+                <p class="text-muted mb-0">Building careers and great teams every day.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Features Section -->
+    <div class="text-center mb-5">
+        <h2 class="fw-bold">Platform Features</h2>
+        <p class="text-muted">Everything you need to manage the hiring process</p>
+    </div>
+    
+    <div class="row g-4">
+        <div class="col-md-4">
+            <div class="card h-100 text-center p-4">
+                <div class="card-body">
+                    <div class="bg-primary text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 60px; height: 60px;">
+                        <i class="fa-solid fa-magnifying-glass fs-4"></i>
+                    </div>
+                    <h5 class="card-title fw-bold">Smart Search</h5>
+                    <p class="card-text text-muted">Filter jobs by keyword, category, or location to find your perfect match instantly.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card h-100 text-center p-4">
+                <div class="card-body">
+                    <div class="bg-primary text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 60px; height: 60px;">
+                        <i class="fa-solid fa-file-pdf fs-4"></i>
+                    </div>
+                    <h5 class="card-title fw-bold">Easy Uploads</h5>
+                    <p class="card-text text-muted">Apply with a single click by securely uploading your PDF or Word resume.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card h-100 text-center p-4">
+                <div class="card-body">
+                    <div class="bg-primary text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 60px; height: 60px;">
+                        <i class="fa-solid fa-envelope fs-4"></i>
+                    </div>
+                    <h5 class="card-title fw-bold">Automated Emails</h5>
+                    <p class="card-text text-muted">Employers can automatically notify applicants about their status updates.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

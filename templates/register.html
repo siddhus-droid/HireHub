@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+{% block title %}Register - HireHub{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6">
+            <div class="card shadow-lg border-0">
+                <div class="card-header bg-primary text-white text-center py-4">
+                    <h3 class="mb-0 fw-bold"><i class="fa-solid fa-user-plus me-2"></i> Create an Account</h3>
+                </div>
+                <div class="card-body p-4 p-md-5">
+                    <form method="POST" action="{{ url_for('register') }}">
+                        <div class="mb-3">
+                            <label for="name" class="form-label fw-semibold">Full Name</label>
+                            <input type="text" class="form-control form-control-lg" id="name" name="name" required placeholder="John Doe">
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="email" class="form-label fw-semibold">Email Address</label>
+                            <input type="email" class="form-control form-control-lg" id="email" name="email" required placeholder="john@example.com">
+                        </div>
+                        
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label for="password" class="form-label fw-semibold">Password</label>
+                                <input type="password" class="form-control form-control-lg" id="password" name="password" required>
+                            </div>
+                            <div class="col-md-6 mt-3 mt-md-0">
+                                <label for="confirm_password" class="form-label fw-semibold">Confirm Password</label>
+                                <input type="password" class="form-control form-control-lg" id="confirm_password" name="confirm_password" required>
+                            </div>
+                        </div>
+
+                        <div class="mb-4">
+                            <label class="form-label fw-semibold">I am a:</label>
+                            <div class="d-flex gap-3">
+                                <div class="form-check p-0 flex-fill">
+                                    <input type="radio" class="btn-check" name="role" id="role_seeker" value="seeker" autocomplete="off" checked>
+                                    <label class="btn btn-outline-primary w-100 py-3 rounded-3" for="role_seeker">
+                                        <i class="fa-solid fa-user-tie mb-2 fs-3 d-block"></i>
+                                        Job Seeker
+                                    </label>
+                                </div>
+                                <div class="form-check p-0 flex-fill">
+                                    <input type="radio" class="btn-check" name="role" id="role_employer" value="employer" autocomplete="off">
+                                    <label class="btn btn-outline-primary w-100 py-3 rounded-3" for="role_employer">
+                                        <i class="fa-solid fa-building mb-2 fs-3 d-block"></i>
+                                        Employer
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary btn-lg w-100 fw-bold mb-3">Register</button>
+                    </form>
+                    
+                    <div class="text-center mt-4">
+                        <p class="text-muted mb-0">Already have an account? <a href="{{ url_for('login') }}" class="text-primary fw-bold text-decoration-none">Login here</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
