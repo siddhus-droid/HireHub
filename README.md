@@ -45,27 +45,15 @@ python app.py
 ```
 
 ## 📸 Screenshots
-
-### Login Page
 <p align="center">
-  <img src="https://github.com/user-attachments/assets/b732e32f-67fb-419f-aa06-412ab351c904" width="700">
+  <img src="https://github.com/user-attachments/assets/d6e91e62-6e67-4ae4-9cde-d4cda1b74e02" width="45%" alt="Login Page">
+  <img src="https://github.com/user-attachments/assets/9218144a-e17d-4a43-a33d-54ce4e46ad64" width="45%" alt="Dashboard">
 </p>
 
-### Dashboard
 <p align="center">
-  <img src="https://github.com/user-attachments/assets/9218144a-e17d-4a43-a33d-54ce4e46ad64" width="700">
+  <img src="https://github.com/user-attachments/assets/64193d48-cc90-4b7e-b81c-1533bc684916" width="45%" alt="Job Listings">
+  <img src="https://github.com/user-attachments/assets/88fbb400-d7b8-48dd-8ada-fbf3e20bf88f" width="45%" alt="Candidate Management">
 </p>
-
-### Job Listings
-<p align="center">
-  <img src="https://github.com/user-attachments/assets/64193d48-cc90-4b7e-b81c-1533bc684916" width="700">
-</p>
-
-### Candidate Management
-<p align="center">
-  <img src="https://github.com/user-attachments/assets/88fbb400-d7b8-48dd-8ada-fbf3e20bf88f" width="700">
-</p>
-
 ## 👨‍💻 Author
 
 **Siddh Shah**
