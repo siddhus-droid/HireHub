@@ -46,7 +46,11 @@ python app.py
 
 ## 📸 Screenshots
 
-_Add screenshots here._
+<img width="787" height="920" alt="image" src="https://github.com/user-attachments/assets/b732e32f-67fb-419f-aa06-412ab351c904" /><img width="1717" height="886" alt="image" src="https://github.com/user-attachments/assets/9218144a-e17d-4a43-a33d-54ce4e46ad64" /><img width="1662" height="767" alt="image" src="https://github.com/user-attachments/assets/64193d48-cc90-4b7e-b81c-1533bc684916" />
+<img width="1660" height="801" alt="image" src="https://github.com/user-attachments/assets/88fbb400-d7b8-48dd-8ada-fbf3e20bf88f" />
+
+
+
 
 ## 👨‍💻 Author
 
